@@ -9,7 +9,6 @@ model = tensorflow.keras.models.load_model('model-OCR.h5')
 
 
 def find_board(img):
-    """Takes an image as input and finds a sudoku board inside of the image"""
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     bfilter = cv2.bilateralFilter(gray, 13, 20, 20)
     edged = cv2.Canny(bfilter, 30, 180)
@@ -41,8 +40,6 @@ def get_perspective(img, location, height=900, width=900):
     matrix = cv2.getPerspectiveTransform(pts1, pts2)
     result = cv2.warpPerspective(img, matrix, (width, height))
     return result
-
-
 
 
 # split the board into 81 individual images
@@ -89,4 +86,7 @@ def read_sudoku(img_name):
             sudoku.append(temp)
             temp = []
             x = 0
+    sudoku = list(np.transpose(np.array(sudoku)))
     return sudoku
+
+# [[1,0,4,],[2,4,6,0...]]

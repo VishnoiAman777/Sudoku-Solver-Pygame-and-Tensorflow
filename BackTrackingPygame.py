@@ -11,29 +11,10 @@ x = 0
 y = 0
 diff = 500 / 9
 val = 0
-#
-# grid = [
-#     [7, 8, 0, 4, 0, 0, 1, 2, 0],
-#     [6, 0, 0, 0, 7, 5, 0, 0, 9],
-#     [0, 0, 0, 6, 0, 1, 0, 7, 8],
-#     [0, 0, 7, 0, 4, 0, 2, 6, 0],
-#     [0, 0, 1, 0, 5, 0, 9, 3, 0],
-#     [9, 0, 4, 0, 6, 0, 0, 0, 5],
-#     [0, 7, 0, 3, 0, 0, 0, 1, 2],
-#     [1, 2, 0, 0, 0, 7, 4, 0, 0],
-#     [0, 4, 9, 2, 0, 6, 0, 0, 7]
-# ]
 
-grid = read_sudoku("sudoku.jpg")
+file = input("Please enter the file name of the image you want to solve ")
+grid = read_sudoku(file)
 print(grid)
-
-
-def getCoordinates(pos):
-    global x
-    x = pos[0] // diff
-    global y
-    y = pos[1] // diff
-
 
 def highlightCell():
     for i in range(2):
@@ -168,17 +149,7 @@ while run:
                 rs = 0
                 error = 0
                 flag2 = 0
-                grid = [
-                    [7, 8, 0, 4, 0, 0, 1, 2, 0],
-                    [6, 0, 0, 0, 7, 5, 0, 0, 9],
-                    [0, 0, 0, 6, 0, 1, 0, 7, 8],
-                    [0, 0, 7, 0, 4, 0, 2, 6, 0],
-                    [0, 0, 1, 0, 5, 0, 9, 3, 0],
-                    [9, 0, 4, 0, 6, 0, 0, 0, 5],
-                    [0, 7, 0, 3, 0, 0, 0, 1, 2],
-                    [1, 2, 0, 0, 0, 7, 4, 0, 0],
-                    [0, 4, 9, 2, 0, 6, 0, 0, 7]
-                ]
+                grid = read_sudoku(file)
 
     if flag2 == 1:
         if not solve(grid, 0, 0):
@@ -187,17 +158,6 @@ while run:
             rs = 1
 
         flag2 = 0
-
-    if val != 0:
-        enterValue(val)
-        if checkInputValidity(grid, int(x), int(y), val):
-            grid[int(x)][int(y)] = val
-            flag1 = 0
-        else:
-            grid[int(x)][int(y)] = 0
-            showError()
-
-        val = 0
 
     if error == 1:
         showError()
